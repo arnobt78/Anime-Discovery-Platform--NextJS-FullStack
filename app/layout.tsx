@@ -1,7 +1,7 @@
 // =============================================================================
 // ROOT LAYOUT (app/layout.tsx)
 // =============================================================================
-// Next.js 14 App Router - Root Layout Component
+// Next.js 15 App Router - Root Layout Component
 // This file defines the root layout that wraps all pages in the application.
 // Every page (e.g. page.tsx) is rendered as the {children} between Hero and Footer.
 // This is a Server Component by default — no "use client" needed.
