@@ -1,4 +1,4 @@
-# Anime Vault | Anime Listing Platform - Next.js Server-Side Rendered FullStack Project
+# Anime Vault | Anime Discovery Platform – Next.js Server-Side Rendering FullStack Project (with infinite scroll, server actions)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2.35-black)](https://nextjs.org/)
@@ -515,7 +515,7 @@ Run `npm run build` and then `npm start`. Set the Node version to 18+ if the pla
 
 ## 🏷 Keywords
 
-Anime, anime list, anime browser, anime database, Anime Vault, Japanese animation, anime discovery, anime ratings, Shikimori, Next.js 14, React 18, TypeScript, Server Components, Client Components, Server Actions, App Router, infinite scroll, Framer Motion, Tailwind CSS, SSR, SEO, responsive design, learning project, open source.
+Anime, anime list, anime browser, anime database, Anime Vault, Japanese animation, anime discovery, anime ratings, Shikimori, Next.js 15, React 18, TypeScript, Server Components, Client Components, Server Actions, App Router, infinite scroll, Framer Motion, Tailwind CSS, SSR, SEO, responsive design, learning project, open source.
 
 ---
 
