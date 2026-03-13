@@ -1,15 +1,19 @@
-/* Tailwind CSS Directives - Import Tailwind's base, components, and utilities */
+/* =============================================================================
+   GLOBAL STYLES (app/globals.css)
+   =============================================================================
+   Tailwind is processed by PostCSS. These directives inject Tailwind's layers.
+   base = reset/normalize; components = reusable classes; utilities = spacing, colors, etc.
+   ============================================================================= */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Global body styles - sets dark background for entire app */
+/* Fallback background when content doesn't cover full viewport */
 body {
   background-color: #000;
 }
 
-/* Custom gradient text class for hero heading */
-/* Creates a red gradient effect on text by clipping background to text */
+/* Used in Hero: the "Diverse Realms" text uses this class for a red gradient. */
 .red-gradient {
   background: linear-gradient(92deg, #ff5956 2.87%, #ee1e38 96.18%);
   background-clip: text; /* Clip background to text shape */
@@ -17,7 +21,7 @@ body {
   -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
 }
 
-/* Root color scheme - tells browser to prefer dark mode */
+/* Helps browser UI (scrollbars, form controls) match our dark theme */
 :root {
   color-scheme: dark;
 }

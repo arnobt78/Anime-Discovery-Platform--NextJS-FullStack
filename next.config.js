@@ -1,19 +1,19 @@
 /**
- * Next.js Configuration File
- * Configures Next.js build and runtime behavior
- * 
+ * Next.js Configuration (next.config.js)
+ * --------------------------------------
+ * Controls build and runtime. Here we only customize images:
+ * Next.js <Image> requires external domains to be allowlisted in remotePatterns.
+ * AnimeCard loads images from shikimori.one — the wildcard allows that and any other HTTPS host.
+ * For production you may want to restrict hostname to e.g. "shikimori.one" only.
+ *
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  // Image optimization configuration
   images: {
-    // Allow images from external domains
-    // This is required for Next.js Image component to work with external URLs
     remotePatterns: [
       {
-        protocol: "https", // Only allow HTTPS (secure)
-        hostname: "*", // Allow any hostname (wildcard)
-        // In production, consider restricting to specific domains for security
+        protocol: "https",
+        hostname: "*",
       },
     ],
   },

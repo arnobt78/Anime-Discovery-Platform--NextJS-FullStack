@@ -1,0 +1,19 @@
+{
+  "name": "Anime Vault | Modern Anime Discovery Platform",
+  "short_name": "Anime Vault",
+  "description": "Discover and explore your favorite anime. A modern, server-rendered anime listing platform with infinite scroll and real-time data from Shikimori API.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F1117",
+  "theme_color": "#0F1117",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["entertainment"],
+  "lang": "en-US"
+}

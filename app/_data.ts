@@ -1,3 +1,10 @@
+// =============================================================================
+// OPTIONAL STATIC DATA (app/_data.ts)
+// =============================================================================
+// This file is NOT used by the live app — production uses Shikimori API via
+// fetchAnime() in action.tsx. You can use this for local demos, tests, or
+// fallback when the API is unavailable. Structure matches AnimeProp from AnimeCard.
+// =============================================================================
 export const data = [
   {
     id: "1",

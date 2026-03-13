@@ -1,24 +1,28 @@
-// AnimeCard Component - Displays individual anime information
+// =============================================================================
+// ANIME CARD (components/AnimeCard.tsx)
+// =============================================================================
+// Server Component: no "use client". Renders one anime (poster, title, kind, episodes, score).
+// Used by fetchAnime() in action.tsx — receives data from Shikimori API.
+// =============================================================================
 import Image from "next/image";
 
 import { MotionDiv } from "./Motion";
 
-// Animation stagger delay in seconds - creates cascading animation effect
+// Stagger: each card animates 0.25s after the previous for a cascade effect.
 const stagger = 0.25;
 
-// Framer Motion animation variants
-// Defines the animation states for the card entrance
+// Framer Motion: opacity 0 → 1. "hidden" / "visible" are variant names used below.
 const variants = {
   hidden: { opacity: 0 }, // Initial state (invisible)
   visible: { opacity: 1 }, // Final state (visible)
 };
 
-// TypeScript interface defining the structure of anime data from API
+// Matches Shikimori API response. Export so action.tsx and others can type the data.
 export interface AnimeProp {
   id: string;
   name: string;
   image: {
-    original: string; // Image URL path (relative to shikimori.one domain)
+    original: string; // Relative path on shikimori.one; we prefix with base URL below
   };
   kind: string; // Type of anime (TV, Movie, OVA, etc.)
   episodes: number; // Total planned episodes
@@ -32,33 +36,29 @@ interface Prop {
 }
 
 /**
- * AnimeCard Component
- * Displays a single anime card with image, title, type, episodes, and rating
- * 
- * @param anime - Anime data object
- * @param index - Index for staggered animation timing
+ * Renders one anime card. Image URL: Shikimori returns relative paths, so we prepend domain.
  */
 function AnimeCard({ anime, index }: Prop) {
   return (
     <MotionDiv
       variants={variants}
-      initial="hidden" // Start invisible
-      animate="visible" // Animate to visible
+      initial="hidden"
+      animate="visible"
       transition={{
-        delay: index * stagger, // Staggered delay based on position
-        ease: "easeInOut", // Smooth easing function
-        duration: 0.5, // Animation duration in seconds
+        delay: index * stagger,
+        ease: "easeInOut",
+        duration: 0.5,
       }}
-      viewport={{ amount: 0 }} // Trigger when element enters viewport
+      viewport={{ amount: 0 }} // Start animation when any part of card enters viewport
       className="max-w-sm rounded relative w-full"
     >
-      {/* Image container with fixed viewport height */}
+      {/* Parent must be relative when using Image with fill */}
       <div className="relative w-full h-[37vh]">
-        {/* Next.js Image component with automatic optimization */}
+        {/* next.config.js remotePatterns allows shikimori.one for optimization */}
         <Image
           src={`https://shikimori.one${anime.image.original}`}
           alt={anime.name}
-          fill // Fills parent container (requires relative parent)
+          fill
           className="rounded-xl"
         />
       </div>
@@ -76,7 +76,7 @@ function AnimeCard({ anime, index }: Prop) {
         <div className="flex gap-4 items-center">
           <div className="flex flex-row gap-2 items-center">
             <Image
-              src="./episodes.svg"
+              src="/episodes.svg"
               alt="episodes"
               width={20}
               height={20}
@@ -89,7 +89,7 @@ function AnimeCard({ anime, index }: Prop) {
           </div>
           <div className="flex flex-row gap-2 items-center">
             <Image
-              src="./star.svg"
+              src="/star.svg"
               alt="star"
               width={18}
               height={18}

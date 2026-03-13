@@ -1,13 +1,17 @@
-// Footer Component - Site footer with copyright and social links
+// =============================================================================
+// FOOTER (components/Footer.tsx)
+// =============================================================================
+// Server Component. Shown on every page via app/layout.tsx. Contains copyright,
+// logo, and social icons (placeholders — update links/alt text as needed).
+// =============================================================================
 import Image from "next/image";
 
 function Footer() {
   return (
-    // Footer with responsive padding, flex layout, and dark background
     <footer className="sm:px-16 py-4 px-8 flex justify-between items-center gap-2 flex-wrap bg-[#161921]">
       <p className="text-base font-bold text-white">@2023 EpicAnimeVault</p>
       <Image
-        src="./logo.svg"
+        src="/logo.svg"
         alt="logo"
         width={47}
         height={44}
@@ -15,21 +19,21 @@ function Footer() {
       />
       <div className="flex items-center gap-6">
         <Image
-          src="./tiktok.svg"
+          src="/tiktok.svg"
           alt="logo"
           width={19}
           height={19}
           className="object-contain"
         />
         <Image
-          src="./instagram.svg"
+          src="/instagram.svg"
           alt="logo"
           width={19}
           height={19}
           className="object-contain"
         />
         <Image
-          src="./twitter.svg"
+          src="/twitter.svg"
           alt="logo"
           width={19}
           height={19}

@@ -1,77 +1,63 @@
-// LoadMore Component - Implements infinite scroll functionality
-// "use client" directive makes this a Client Component (needed for hooks)
+// =============================================================================
+// LOAD MORE / INFINITE SCROLL (components/LoadMore.tsx)
+// =============================================================================
+// Client Component: "use client" required because we use hooks (useState, useEffect, useInView).
+// When the trigger (ref) scrolls into view, we call the fetchAnime Server Action and append
+// the returned AnimeCard elements to local state. Page 1 is already rendered by page.tsx.
+// =============================================================================
 "use client";
 
 import Image from "next/image";
-// Hook to detect when element enters viewport (for infinite scroll)
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 
 import { fetchAnime } from "../app/action";
 
-// Page counter starts at 2 (page 1 is loaded in Home component)
-// Using module-level variable to persist across re-renders
+// Persists across re-renders. Starts at 2 because page 1 is fetched in app/page.tsx.
 let page = 2;
 
-// Type definition for anime card elements
+// fetchAnime returns JSX.Element[]; we store and render them in the grid below.
 export type AnimeCard = JSX.Element;
 
 /**
- * LoadMore Component - Handles infinite scroll pagination
- * 
- * How it works:
- * 1. Uses Intersection Observer to detect when user scrolls near bottom
- * 2. When trigger element (ref) is in view, fetches next page
- * 3. Appends new data to existing data array
- * 4. Shows loading spinner while fetching
+ * Renders: (1) a grid of newly loaded cards, (2) a trigger div with ref, (3) spinner when loading.
+ * When the trigger enters the viewport, we fetch the next page and append cards to data.
  */
 function LoadMore() {
-  // useInView hook returns ref (to attach to element) and inView (boolean)
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView(); // ref = attach to div; inView = true when that div is visible
 
-  // State to store loaded anime cards
   const [data, setData] = useState<AnimeCard[]>([]);
-  // Loading state for spinner display
   const [isLoading, setIsLoading] = useState(true);
 
-  // Effect hook runs when inView, data, or isLoading changes
   useEffect(() => {
     if (inView) {
       setIsLoading(true);
-      // Delay prevents rapid-fire requests and improves UX
-      const delay = 500;
+      const delay = 500; // Small debounce so we don't fire multiple requests at once
 
       const timeoutId = setTimeout(() => {
-        // Call Server Action to fetch next page
         fetchAnime(page).then((res) => {
-          // Append new data to existing data (spread operator)
-          setData([...data, ...res]);
-          page++; // Increment page for next fetch
+          setData([...data, ...res]); // Append new cards; data is in dependency array
+          page++;
         });
-
         setIsLoading(false);
       }, delay);
 
-      // Cleanup: Clear timeout if component unmounts or inView changes
-      // Prevents memory leaks and unnecessary API calls
-      return () => clearTimeout(timeoutId);
+      return () => clearTimeout(timeoutId); // Cleanup on unmount or when inView changes
     }
   }, [inView, data, isLoading]);
 
   return (
     <>
-      {/* Grid to display loaded anime cards */}
+      {/* Same grid classes as page.tsx so new cards align with initial cards */}
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
         {data}
       </section>
-      {/* Intersection Observer trigger element */}
-      {/* When this div enters viewport, inView becomes true */}
+      {/* ref attached here: when this div scrolls into view, useInView sets inView = true */}
       <section className="flex justify-center items-center w-full">
         <div ref={ref}>
-          {/* Show spinner only when loading and element is in view */}
           {inView && isLoading && (
             <Image
-              src="./spinner.svg"
+              src="/spinner.svg"
               alt="spinner"
               width={56}
               height={56}
