@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import {
   CalendarCheck,
   Clapperboard,
+  Clock,
   Film,
   PlayCircle,
   Star,
@@ -178,7 +179,10 @@ export default async function AnimeDetailPage({
               </div>
             )}
             {anime.duration != null && (
-              <span className="text-white/80">{anime.duration} min/ep</span>
+              <div className="flex items-center gap-2">
+                <Clock className="w-6 h-6 text-white/80 shrink-0" aria-hidden />
+                <span className="text-white/80">{anime.duration} min/ep</span>
+              </div>
             )}
           </div>
 
