@@ -1,14 +1,13 @@
-# Anime Discovery Platform – Next.js, GraphQL, Server-Side Rendering FullStack Project (with infinite scroll, server actions)
+# Anime Vault | Anime Discovery Platform – Next.js, GraphQL & REST, Server-Side Rendering FullStack Project (with infinite scroll, server actions)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-14.2.35-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3-38bdf8)](https://tailwindcss.com/)
-[![GraphQL](https://img.shields.io/badge/GraphQL-16.10.0-e10098)](https://graphql.org/)
-[![Shikimori API](https://img.shields.io/badge/Shikimori-API-blue)](https://shikimori.one/api/doc)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8)](https://tailwindcss.com/)
+[![Shikimori API](https://img.shields.io/badge/Shikimori-GraphQL%20%2B%20REST-blue)](https://shikimori.one/api/doc)
 
-A modern, fully server-rendered anime listing and browsing platform built with **Next.js App Router**. Discover and explore anime with infinite scroll, beautiful animations, and real-time data from the Shikimori API. This project is designed for learning and instruction—demonstrating Server Components, Server Actions, infinite scroll, and SEO best practices in a single codebase.
+A modern, server-rendered anime discovery platform built with **Next.js 15 App Router**. Browse anime with infinite scroll, search and filters (kind, score, status, order), and click through to full detail pages. Data is fetched via **Shikimori GraphQL** for the list (and detail when available), with **REST fallback** for single-anime detail. Poster and screenshots open in a 90vh lightbox with download; video thumbnails and Lucide icons are used across the UI. No backend, database, or auth—ideal for learning Server Components, Server Actions, GraphQL, and SEO.
 
 **Live Demo:** [https://anime-lover.vercel.app/](https://anime-lover.vercel.app/)
 
@@ -39,18 +38,20 @@ A modern, fully server-rendered anime listing and browsing platform built with *
 
 ## 🎯 Project Overview
 
-**Anime Vault** is a production-ready anime discovery platform that demonstrates modern web development practices using **Next.js 14 App Router**. It is intended for **educational use**—teaching Server Components, Client Components, Server Actions, infinite scroll, and SEO-friendly metadata in one place.
+**Anime Vault** is a production-ready anime discovery platform built with **Next.js 15 App Router**. It is intended for **educational use**—teaching Server Components, Client Components, Server Actions, GraphQL, REST fallback, infinite scroll, and SEO in one codebase.
 
 **What this project showcases:**
 
 - **Server-Side Rendering (SSR)** — Initial HTML is rendered on the server for fast loads and better SEO.
-- **Server Actions** — Server-side functions called from the client without separate API routes.
-- **Infinite Scroll** — More anime load as you scroll, using the Intersection Observer API.
-- **Framer Motion** — Staggered card animations for a polished UI.
-- **TypeScript** — Full type safety across the codebase.
-- **Tailwind CSS** — Utility-first, responsive styling.
+- **Server Actions** — Server-side functions called from the client (e.g. `fetchAnime`) without custom API routes for data.
+- **GraphQL + REST** — List and detail use Shikimori GraphQL; detail falls back to REST when GraphQL returns no data.
+- **Infinite Scroll** — More anime load as you scroll via the Intersection Observer API.
+- **Search & Filters** — Kind, score, status, order; state in URL for shareable links.
+- **Detail Pages** — Per-anime route with poster, metadata, genres, studios, videos, screenshots, and lightbox + download.
+- **Framer Motion & Lucide** — Staggered card animations and Lucide React icons for badges and actions.
+- **TypeScript & Tailwind** — Full type safety and utility-first styling.
 
-No backend database or custom API is required; data comes from the public **Shikimori API**. The app is suitable for beginners learning Next.js 14 and for developers reusing its patterns in other projects.
+No backend database or auth; data comes from the public **Shikimori API**. Suitable for learning Next.js 15, GraphQL, and reusing patterns in other projects.
 
 ---
 
@@ -58,23 +59,23 @@ No backend database or custom API is required; data comes from the public **Shik
 
 ### Core Features
 
-- 🎨 **Modern UI/UX** — Dark-themed interface with smooth animations and gradient accents.
-- 🔄 **Infinite Scroll** — Automatic loading of more anime as you reach the bottom.
-- 🚀 **Server-Side Rendering** — Fast first paint and SEO-friendly HTML.
+- 🎨 **Modern UI/UX** — Dark-themed interface with smooth animations and Lucide icons.
+- 🏠 **Home** — Anime grid with infinite scroll, search bar, and filters (Kind, Score, Status, Order).
+- 📄 **Detail Pages** — Full anime info: poster (clickable → 90vh lightbox + download), score, episodes, genres, studios, description, videos, screenshots (clickable → lightbox + download), next episode, external links.
+- 🔄 **Infinite Scroll** — Automatic loading of more anime as you scroll; respects current filters.
+- 🚀 **Server-Side Rendering** — Fast first paint and SEO-friendly HTML; dynamic metadata per anime.
 - 📱 **Fully Responsive** — Works on desktop, tablet, and mobile.
-- 🎭 **Framer Motion Animations** — Staggered card entrance animations.
-- 🔍 **Real-Time Data** — Live anime data from Shikimori API (popularity order).
-- ⚡ **Optimized Images** — Next.js `Image` with optimization and lazy loading.
-- 🎯 **TypeScript** — Type-safe props and API data.
-- 📊 **SEO Optimized** — Metadata, Open Graph, Twitter cards, and a web manifest.
+- 🎭 **Framer Motion** — Staggered card animations on the home grid.
+- 🔍 **Real-Time Data** — Shikimori GraphQL for list (and detail when supported); REST fallback for detail.
+- ⚡ **Images** — Next.js `Image` where possible; poster/screenshots lightbox with download via API proxy.
+- 📊 **SEO** — Metadata, Open Graph, Twitter cards, web manifest.
 
 ### Technical Features
 
-- Next.js 14 App Router (single route: home).
-- Server Actions for fetching anime (no `/api` routes).
-- Client Components only where needed (e.g. `LoadMore` for scroll and state).
-- Intersection Observer for scroll-based loading.
-- Font optimization (DM Sans via Next.js font system).
+- Next.js 15 App Router: `/` (home), `/anime/[id]` (detail), `/api/download-image` (image download proxy).
+- Server Actions for list fetching; GraphQL in `lib/shikimori-graphql.ts`; REST fallback for single anime.
+- Client Components: `LoadMore`, `SearchFilters`, `BackToTop`, `PosterLightbox`, `ScreenshotsGallery`, `Motion`.
+- Filters and search reflected in URL; Back to top button after scroll.
 - PWA-ready manifest and theme color.
 
 ---
@@ -85,24 +86,25 @@ No backend database or custom API is required; data comes from the public **Shik
 
 | Technology       | Version | Purpose                                              |
 | ---------------- | ------- | ---------------------------------------------------- |
-| **Next.js**      | 14.2.35 | React framework with App Router, SSR, Server Actions |
+| **Next.js**      | 15      | App Router, SSR, Server Actions, API routes          |
 | **React**        | 18      | UI library and component model                       |
 | **TypeScript**   | 5       | Static typing and better DX                          |
-| **Tailwind CSS** | 3.3     | Utility-first CSS and responsive design              |
+| **Tailwind CSS** | 3       | Utility-first CSS and responsive design              |
 
 ### Key Libraries
 
-- **framer-motion** (^10.16.5) — Declarative animations (e.g. opacity, stagger). Used in `AnimeCard` and via the `Motion` wrapper.
-- **react-intersection-observer** (^9.5.3) — `useInView` hook to detect when the “load more” trigger enters the viewport.
+- **framer-motion** — Declarative animations; used in `AnimeCard` via `Motion` wrapper.
+- **react-intersection-observer** — `useInView` for infinite-scroll trigger.
+- **lucide-react** — Icons for badges (kind, status, score, episodes), download, close, etc.
 
 ### Development Tools
 
-- **ESLint** + **eslint-config-next** — Linting and Next.js rules (`npm run lint`).
-- **PostCSS** + **Autoprefixer** — CSS processing and vendor prefixes for Tailwind.
+- **ESLint** + **eslint-config-next** — Linting (`npm run lint`).
+- **PostCSS** + **Autoprefixer** — Tailwind.
 
 ### External API
 
-- **Shikimori API** — Public REST API for anime data. No API key required. [Documentation](https://shikimori.one/api/doc).
+- **Shikimori** — GraphQL for list (and detail when supported); REST fallback for single-anime detail. No API key. [GraphQL](https://shikimori.one/api/doc/graphql) · [API](https://shikimori.one/api/doc).
 
 ---
 
@@ -110,46 +112,58 @@ No backend database or custom API is required; data comes from the public **Shik
 
 ```bash
 anime-vault/
-├── app/                    # Next.js 14 App Router
-│   ├── layout.tsx          # Root layout, metadata, Hero, Footer
-│   ├── page.tsx            # Home page (Server Component)
-│   ├── action.tsx          # Server Actions (fetchAnime)
-│   ├── globals.css         # Tailwind + global styles
-│   ├── _data.ts            # Optional static data (not used in production flow)
-│   └── favicon.ico         # Site favicon
+├── app/
+│   ├── layout.tsx              # Root layout, metadata, Hero, Footer, Providers
+│   ├── page.tsx                # Home: grid, SearchFilters, LoadMore, BackToTop
+│   ├── action.tsx              # Server Action fetchAnime (GraphQL list)
+│   ├── providers.tsx           # Client providers wrapper
+│   ├── globals.css             # Tailwind + global styles
+│   ├── anime/[id]/
+│   │   ├── page.tsx            # Detail page (GraphQL → REST fallback, PosterLightbox, ScreenshotsGallery)
+│   │   ├── loading.tsx         # Skeleton while loading
+│   │   └── not-found.tsx       # 404 for missing anime
+│   └── api/download-image/
+│       └── route.ts            # GET proxy for image download (same-origin)
 │
 ├── components/
-│   ├── AnimeCard.tsx       # Single anime card (image, title, type, episodes, score)
-│   ├── LoadMore.tsx        # Infinite scroll trigger and grid for new cards
-│   ├── Hero.tsx            # Top hero section with logo and heading
-│   ├── Footer.tsx          # Footer with copyright and social icons
-│   └── Motion.tsx          # Framer Motion div wrapper
+│   ├── AnimeCard.tsx           # Card with Lucide icons (kind, status, score, episodes)
+│   ├── LoadMore.tsx            # Infinite scroll + fetchAnime with filters
+│   ├── SearchFilters.tsx      # Search + Kind, Score, Status, Order dropdowns
+│   ├── BackToTop.tsx           # Fixed button after scroll
+│   ├── PosterLightbox.tsx      # Clickable poster → 90vh modal + download
+│   ├── ScreenshotsGallery.tsx  # Clickable screenshots → modal + download
+│   ├── Hero.tsx, Footer.tsx    # Header and footer
+│   ├── Motion.tsx              # Framer Motion wrapper
+│   └── ui/                     # Input, Select, Button
 │
-├── public/
-│   ├── anime.png           # Hero/OG image
-│   ├── hero.png            # Hero background (Tailwind bg-hero)
-│   ├── logo.svg            # Site logo
-│   ├── favicon.ico         # (also in app/) — icons
-│   ├── site.webmanifest    # PWA manifest
-│   ├── spinner.svg         # Loading spinner
-│   ├── episodes.svg        # Episodes icon
-│   ├── star.svg            # Rating icon
-│   └── [twitter, instagram, tiktok].svg  # Social icons
+├── lib/
+│   ├── api.ts                  # SHIKIMORI_BASE, ANIMES_API, GRAPHQL_ENDPOINT, MAX_ANIME_LIMIT
+│   ├── shikimori-graphql.ts    # GraphQL client, list/detail queries, REST fallback
+│   ├── filter-options.ts       # KIND_OPTIONS, STATUS_OPTIONS, SCORE_OPTIONS, ORDER_OPTIONS
+│   └── download-image.ts       # downloadImage(url, filename) → API proxy
 │
-├── next.config.js          # Next config (e.g. images.remotePatterns)
-├── tailwind.config.ts      # Tailwind theme (e.g. hero background)
-├── tsconfig.json           # TypeScript config
-├── postcss.config.js       # PostCSS for Tailwind
-└── package.json            # Scripts and dependencies
+├── types/
+│   └── anime.ts                # AnimeProp, AnimeFilters, AnimeDetail
+│
+├── hooks/
+│   └── useFiltersFromSearchParams.ts
+│
+├── public/                     # Static assets (logo, icons, manifest, etc.)
+├── next.config.js              # images.remotePatterns (shikimori, img.youtube, etc.)
+├── tailwind.config.ts
+├── tsconfig.json
+└── package.json
 ```
 
 **Important files:**
 
-- **`app/layout.tsx`** — Wraps all pages; defines metadata, viewport, fonts, and global layout (Hero + children + Footer).
-- **`app/page.tsx`** — Home: fetches first page of anime on the server and renders the grid + `LoadMore`.
-- **`app/action.tsx`** — Defines the `fetchAnime(page)` Server Action used by the home page and `LoadMore`.
-- **`components/AnimeCard.tsx`** — Renders one anime; uses `MotionDiv` and Next.js `Image`.
-- **`components/LoadMore.tsx`** — Client component: `useInView` + `fetchAnime` for infinite scroll.
+- **`app/layout.tsx`** — Global metadata, viewport, fonts; Hero + children + Footer.
+- **`app/page.tsx`** — Home: reads URL params → filters, fetches first page via GraphQL, renders grid + SearchFilters + LoadMore + BackToTop.
+- **`app/action.tsx`** — `fetchAnime(page, filters)` Server Action; calls `fetchAnimeListGraphQL`.
+- **`app/anime/[id]/page.tsx`** — Detail: `fetchAnimeByIdGraphQL` then `fetchAnimeByIdREST` fallback; poster lightbox, videos, screenshots gallery, Lucide badges.
+- **`lib/shikimori-graphql.ts`** — GraphQL requests, list/detail normalization, REST fallback for detail.
+- **`components/AnimeCard.tsx`** — Single card (Lucide icons); links to `/anime/[id]`.
+- **`components/LoadMore.tsx`** — Client: `useInView` + `fetchAnime(page, filters)`.
 
 ---
 
@@ -227,13 +241,13 @@ Runs ESLint (Next.js config) to check code quality.
 
 ## 🛤 Routes & Pages
 
-This app uses the **App Router** with a single route:
+| Route                  | File                        | Description                                      |
+| ---------------------- | --------------------------- | ------------------------------------------------ |
+| `/`                    | `app/page.tsx`              | Home: search, filters, anime grid, infinite scroll, Back to top |
+| `/anime/[id]`          | `app/anime/[id]/page.tsx`   | Detail: poster (lightbox + download), metadata, videos, screenshots (lightbox + download) |
+| `/api/download-image`  | `app/api/download-image/route.ts` | GET proxy for image download (allowed hosts: shikimori, img.youtube) |
 
-| Route | File           | Description                        |
-| ----- | -------------- | ---------------------------------- |
-| `/`   | `app/page.tsx` | Home: anime grid + infinite scroll |
-
-There are no API routes under `app/api/`. Data fetching is done via the **Server Action** `fetchAnime` in `app/action.tsx`, called from the server in `page.tsx` and from the client in `LoadMore.tsx`.
+List data is fetched via the **Server Action** `fetchAnime` in `app/action.tsx` (GraphQL). Detail data is fetched in `app/anime/[id]/page.tsx` (GraphQL with REST fallback).
 
 ---
 
@@ -247,18 +261,9 @@ There are no API routes under `app/api/`. Data fetching is done via the **Server
 
 ### Request Flow
 
-```bash
-User visits /
-    → layout.tsx wraps page with Hero + Footer
-    → page.tsx (Server Component) runs on server
-    → fetchAnime(1) runs on server → Shikimori API
-    → First 8 anime cards rendered as HTML
-    → HTML sent to browser
-    → LoadMore hydrates (client)
-    → User scrolls → useInView sees trigger
-    → fetchAnime(2), fetchAnime(3), … called from client (still run on server)
-    → New cards appended to the list
-```
+**Home:** User visits `/` (optionally with `?search=...&kind=...&status=...&order=...`) → `page.tsx` reads params → `fetchAnime(1, filters)` (GraphQL list) → first 8 cards rendered → HTML sent → LoadMore and SearchFilters hydrate → scroll triggers `fetchAnime(2, filters)`, etc.
+
+**Detail:** User clicks a card → `/anime/[id]` → `fetchAnimeByIdGraphQL(id)`; if empty, `fetchAnimeByIdREST(id)` → poster, metadata, videos, screenshots, links rendered. Poster and screenshots open in lightbox with download via `/api/download-image`.
 
 ### Why This Matters for Learning
 
@@ -273,28 +278,15 @@ User visits /
 ### 1. AnimeCard
 
 **File:** `components/AnimeCard.tsx`  
-**Type:** Server Component (no `"use client"`).
+**Type:** Client (uses `MotionDiv`; card is a `Link` to `/anime/[id]`).
 
-**Purpose:** Renders one anime: poster image, name, kind (TV/Movie/OVA), episodes, and score.
+**Purpose:** Renders one anime: poster, name, status + kind badges (Lucide), up to 2 genres, episodes (Clapperboard), score (Star).
 
-**Props:**
+**Props:** `anime: AnimeProp`, `index: number`. `AnimeProp` includes optional `genres`, `status`, `rating` from GraphQL.
 
-```ts
-interface Prop {
-  anime: AnimeProp; // { id, name, image, kind, episodes, episodes_aired, score }
-  index: number; // Used for stagger delay (index * 0.25s)
-}
-```
+**Behavior:** `MotionDiv` for fade-in; `image.original` is already a full URL from GraphQL mapping. Lucide icons: `Tv`/`Clapperboard` for kind, `PlayCircle`/`CalendarCheck` for status, `Star`, `Clapperboard` for score/episodes.
 
-**Behavior:** Uses `MotionDiv` for fade-in and optional viewport trigger. Images from Shikimori use `https://shikimori.one${anime.image.original}`. Next.js `Image` with `fill` for responsive sizing.
-
-**Usage:**
-
-```tsx
-import AnimeCard from "@/components/AnimeCard";
-
-<AnimeCard anime={animeData} index={0} />;
-```
+**Usage:** Rendered by `fetchAnime` in `action.tsx`; each card links to `/anime/${anime.id}`.
 
 ---
 
@@ -307,10 +299,10 @@ import AnimeCard from "@/components/AnimeCard";
 
 **Behavior:** Uses `useInView` from `react-intersection-observer`. On `inView`, calls `fetchAnime(page)` (Server Action). Keeps a module-level `page` (starts at 2). Shows a spinner while loading. Uses a short delay (500 ms) before requesting to avoid rapid repeated calls.
 
-**Usage:** Place once below the initial anime grid (as in `app/page.tsx`):
+**Usage:** In `app/page.tsx`, below the grid; pass `key={JSON.stringify(filters)}` and `initialFilters={filters}` so pagination resets when filters change.
 
 ```tsx
-<LoadMore />
+<LoadMore key={JSON.stringify(filters ?? {})} initialFilters={filters ?? undefined} />
 ```
 
 ---
@@ -337,7 +329,43 @@ import AnimeCard from "@/components/AnimeCard";
 
 ---
 
-### 5. Motion (MotionDiv)
+### 5. SearchFilters
+
+**File:** `components/SearchFilters.tsx`  
+**Type:** Client Component.
+
+**Purpose:** Search input + Kind, Score, Status, Order dropdowns; updates URL search params so the home page and LoadMore use the same filters. “Clear filters” resets to `/`.
+
+---
+
+### 6. BackToTop
+
+**File:** `components/BackToTop.tsx`  
+**Type:** Client Component.
+
+**Purpose:** Fixed bottom-right “Back to top” button; visible after scrolling ~400px; smooth scroll to top. Rendered once on the home page.
+
+---
+
+### 7. PosterLightbox
+
+**File:** `components/PosterLightbox.tsx`  
+**Type:** Client Component.
+
+**Purpose:** Clickable poster on the detail page; opens a 90vh modal with the image and Download / Close (Lucide). Download uses `downloadImage()` → API proxy so the file is saved. Escape or click outside to close.
+
+---
+
+### 8. ScreenshotsGallery
+
+**File:** `components/ScreenshotsGallery.tsx`  
+**Type:** Client Component.
+
+**Purpose:** Grid of clickable screenshot thumbnails; clicking opens a 90vh modal with the image and Download / Close. Same download behavior as PosterLightbox.
+
+---
+
+### 9. Motion (MotionDiv)
 
 **File:** `components/Motion.tsx`  
 **Type:** Client Component (`"use client"`).
@@ -373,9 +401,11 @@ This project uses **Shikimori’s GraphQL API** for list and detail data (single
 **Where it’s used:**
 
 - **List:** `app/action.tsx` → `fetchAnimeListGraphQL(page, filters)` → renders `<AnimeCard />` for each item.
-- **Detail:** `app/anime/[id]/page.tsx` → `fetchAnimeByIdGraphQL(id)` for the anime detail page (including videos, screenshots, next episode).
+- **Detail:** `app/anime/[id]/page.tsx` → `fetchAnimeByIdGraphQL(id)` first; if that returns nothing, **REST fallback** `fetchAnimeByIdREST(id)` (GET `https://shikimori.one/api/animes/:id`). Detail page shows poster, metadata, genres, studios, description, videos (thumbnails unoptimized for any host), screenshots, next episode, external links.
 
-There is no separate backend; Next.js server runs Server Actions and the detail page and talks to Shikimori GraphQL.
+**Image download:** For poster and screenshot lightboxes, the Download button uses `/api/download-image?url=...&filename=...` so the browser gets a same-origin response with `Content-Disposition: attachment` and saves the file instead of opening in a new tab. Allowed hosts: `shikimori.one`, `shikimori.io`, `img.youtube.com`.
+
+There is no separate backend; the Next.js server runs Server Actions, the detail page, and the download-image API route.
 
 ---
 
@@ -397,9 +427,9 @@ The home page is a Server Component. `fetchAnime(1)` runs on the server; the fir
 
 `AnimeCard` uses `MotionDiv` with simple opacity variants and a stagger delay based on `index`. Animations run when the component mounts (and optionally when in view, depending on `viewport` props).
 
-### 5. Image Optimization
+### 5. Image Optimization and Download
 
-Next.js `Image` is used for poster images (Shikimori URLs) and local assets (icons, logo). `next.config.js` uses `images.remotePatterns` so Shikimori’s domain is allowed. Images are optimized and lazy-loaded by Next.js.
+Next.js `Image` is used for posters and screenshots; `next.config.js` `images.remotePatterns` allows Shikimori and img.youtube (http/https). Video thumbnails use `unoptimized` so any host (e.g. video.sibnet.ru) works without adding every domain. Poster and screenshot downloads go through `/api/download-image` so the response is same-origin and the browser saves the file instead of opening in a new tab.
 
 ---
 
@@ -432,11 +462,13 @@ import type { AnimeProp } from "@/components/AnimeCard";
 const anime: AnimeProp = {
   id: "1",
   name: "Naruto",
-  image: { original: "/system/animes/original/1.jpg" },
+  image: { original: "https://shikimori.io/.../1.jpg" }, // full URL from GraphQL mapping
   kind: "TV",
   episodes: 220,
   episodes_aired: 220,
   score: "8.3",
+  genres: [{ id: 1, name: "Adventure" }], // optional
+  status: "released", // optional
 };
 ```
 
@@ -509,16 +541,17 @@ Anime, anime list, anime browser, anime database, Anime Vault, Japanese animatio
 
 ## 🎓 Conclusion
 
-**Anime Vault** is a small but complete example of a Next.js 14 App Router app: Server Components for the main UI, one Server Action for data, and a single Client Component for infinite scroll. It uses the public Shikimori API and requires no environment variables, so it’s easy to clone and run for learning or as a base for your own anime or listing projects.
+**Anime Vault** is a full example of a Next.js 15 App Router app: Server Components for layout and pages, Server Actions for list data, GraphQL + REST for Shikimori, and Client Components for filters, infinite scroll, lightboxes, and Back to top. No env vars are required; the Shikimori API is public.
 
 **Takeaways:**
 
-- Server Components reduce client JS and improve performance and SEO.
-- Server Actions can replace custom API routes for many data-fetching needs.
-- Infinite scroll can be implemented with one Client Component and the Intersection Observer.
-- TypeScript and Tailwind help keep the codebase maintainable and consistent.
+- Server Components reduce client JS and improve SEO; detail pages use dynamic metadata per anime.
+- Server Actions power list fetching; GraphQL is used for list and detail with REST fallback when GraphQL returns no detail.
+- Infinite scroll plus URL-based filters (search, kind, score, status, order) keep state shareable.
+- Image download for cross-origin URLs can be handled with a same-origin API proxy and `Content-Disposition: attachment`.
+- Lucide React and Framer Motion keep the UI consistent and animated.
 
-**Possible next steps:** Detail pages per anime, search/filters, favorites (e.g. localStorage or a backend), dark/light theme toggle, or switching to another data source while keeping the same patterns.
+**Possible next steps:** Favorites (e.g. localStorage), dark/light theme, or another data source while reusing the same patterns.
 
 ---
 

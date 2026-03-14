@@ -23,6 +23,7 @@ import {
 } from "@/lib/shikimori-graphql";
 import { PosterLightbox } from "@/components/PosterLightbox";
 import { ScreenshotsGallery } from "@/components/ScreenshotsGallery";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const KIND_ICON: Record<string, ComponentType<{ className?: string }>> = {
   tv: Tv,
@@ -93,6 +94,7 @@ export default async function AnimeDetailPage({
 
   return (
     <main className="sm:p-16 py-16 px-8 max-w-7xl mx-auto">
+      <ScrollToTop />
       <Link
         href="/"
         className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 text-sm font-medium"

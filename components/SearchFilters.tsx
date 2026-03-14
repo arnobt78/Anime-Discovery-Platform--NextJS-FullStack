@@ -128,7 +128,7 @@ export function SearchFilters() {
       {/* Right: Search bar + Search button (wider, up to max-w-2xl) */}
       <form
         onSubmit={handleSearchSubmit}
-        className="flex gap-2 w-full max-w-xl sm:flex-1 sm:min-w-0"
+        className="flex gap-2 w-full max-w-md sm:flex-1 sm:min-w-0"
       >
         <div className="relative flex-1 min-w-0">
           <MdSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 w-5 h-5 pointer-events-none" />

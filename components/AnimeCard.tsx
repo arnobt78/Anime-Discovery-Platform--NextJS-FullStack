@@ -51,56 +51,53 @@ function AnimeCard({ anime, index }: Prop) {
         />
       </div>
       <div className="py-4 flex flex-col gap-3">
-        <div className="flex justify-between items-center gap-1">
-          <h2 className="font-bold text-white text-xl line-clamp-1 w-full">
-            {anime.name}
-          </h2>
-          <div className="flex items-center gap-1 shrink-0">
-            {anime.status && (
-              <span className="inline-flex items-center gap-1 py-0.5 px-1.5 bg-white/10 rounded text-white/80 text-xs capitalize">
-                {anime.status.toLowerCase() === "ongoing" ? (
-                  <PlayCircle className="w-3.5 h-3.5 shrink-0" aria-hidden />
-                ) : (
-                  <CalendarCheck className="w-3.5 h-3.5 shrink-0" aria-hidden />
-                )}
-                {anime.status}
-              </span>
+        {/* Row 1: Title only, full width, truncated */}
+        <h2 className="font-bold text-white text-xl line-clamp-1 min-w-0 w-full truncate" title={anime.name}>
+          {anime.name}
+        </h2>
+        {/* Row 2: Badges — kind (with icon), then genre pills */}
+        <div className="flex flex-wrap items-center gap-1.5">
+          <div className="inline-flex items-center gap-1 py-1 px-2 bg-[#161921] rounded-sm">
+            {anime.kind?.toLowerCase() === "tv" ? (
+              <Tv className="w-4 h-4 text-white shrink-0" aria-hidden />
+            ) : (
+              <Clapperboard className="w-4 h-4 text-white shrink-0" aria-hidden />
             )}
-            <div className="inline-flex items-center gap-1 py-1 px-2 bg-[#161921] rounded-sm">
-              {(anime.kind?.toLowerCase() === "tv" ? (
-                <Tv className="w-4 h-4 text-white shrink-0" aria-hidden />
-              ) : (
-                <Clapperboard className="w-4 h-4 text-white shrink-0" aria-hidden />
-              ))}
-              <p className="text-white text-sm font-bold capitalize">
-                {anime.kind}
-              </p>
-            </div>
+            <p className="text-white text-sm font-bold capitalize">
+              {anime.kind}
+            </p>
           </div>
+          {anime.genres && anime.genres.length > 0 && anime.genres.slice(0, 2).map((g) => (
+            <span
+              key={g.id}
+              className="py-0.5 px-2 rounded bg-[#161921] text-white/80 text-xs"
+            >
+              {g.name}
+            </span>
+          ))}
         </div>
-        {anime.genres && anime.genres.length > 0 && (
-          <div className="flex flex-wrap gap-1">
-            {anime.genres.slice(0, 2).map((g) => (
-              <span
-                key={g.id}
-                className="py-0.5 px-2 rounded bg-[#161921] text-white/80 text-xs"
-              >
-                {g.name}
-              </span>
-            ))}
-          </div>
-        )}
-        <div className="flex gap-4 items-center">
+        {/* Row 3: Episodes + score with icons, then status (Released) at the end */}
+        <div className="flex flex-wrap gap-4 items-center">
           <div className="flex flex-row gap-2 items-center">
             <Clapperboard className="w-5 h-5 text-white shrink-0" aria-hidden />
             <p className="text-base text-white font-bold">
-              {anime.episodes || anime.episodes_aired}
+              {anime.episodes ?? anime.episodes_aired ?? "—"}
             </p>
           </div>
           <div className="flex flex-row gap-2 items-center">
             <Star className="w-5 h-5 text-[#FFAD49] shrink-0" aria-hidden />
             <p className="text-base font-bold text-[#FFAD49]">{anime.score}</p>
           </div>
+          {anime.status && (
+            <span className="inline-flex items-center gap-1 py-0.5 px-1.5 bg-white/10 rounded text-white/80 text-xs capitalize">
+              {anime.status.toLowerCase() === "ongoing" ? (
+                <PlayCircle className="w-3.5 h-3.5 shrink-0" aria-hidden />
+              ) : (
+                <CalendarCheck className="w-3.5 h-3.5 shrink-0" aria-hidden />
+              )}
+              {anime.status}
+            </span>
+          )}
         </div>
       </div>
       </Link>
