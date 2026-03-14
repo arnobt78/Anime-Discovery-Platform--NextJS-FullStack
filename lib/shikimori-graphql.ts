@@ -9,11 +9,16 @@
 import { ANIMES_API, GRAPHQL_ENDPOINT, MAX_ANIME_LIMIT, SHIKIMORI_BASE } from "./api";
 import type { AnimeDetail, AnimeFilters, AnimeProp } from "@/types/anime";
 
-/** GraphQL may return full URLs (e.g. shikimori.io) or paths. Always return a single full URL. */
+/** GraphQL may return full URLs (e.g. shikimori.io) or paths. Always return a single full HTTPS URL to avoid mixed-content warnings. */
 function toFullImageUrl(url: string | null | undefined): string {
   if (!url) return "";
-  if (url.startsWith("http://") || url.startsWith("https://")) return url;
-  return `${SHIKIMORI_BASE}${url}`;
+  let full = url;
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    full = `${SHIKIMORI_BASE}${url}`;
+  }
+  // Prefer HTTPS so HTTPS pages never request insecure resources
+  if (full.startsWith("http://")) return full.replace(/^http:\/\//i, "https://");
+  return full;
 }
 
 const USER_AGENT = "AnimeVault/1.0 (https://github.com/anime-vault)";
