@@ -11,7 +11,10 @@ A modern, server-rendered anime discovery platform built with **Next.js 15 App R
 
 **Live Demo:** [https://anime-lover.vercel.app/](https://anime-lover.vercel.app/)
 
-
+![Image 1](https://github.com/user-attachments/assets/12062793-c3a6-449c-ab46-5d22e862722c)
+![Image 2](https://github.com/user-attachments/assets/9a72d64a-2939-470c-a861-0050c4c607ce)
+![Image 3](https://github.com/user-attachments/assets/054722e2-98f6-4ae8-8bcf-4cdd73240791)
+![Image 4](https://github.com/user-attachments/assets/7553f768-8d5e-4474-b6a3-4e67e6b1acf7)
 
 ## 📋 Table of Contents
 
