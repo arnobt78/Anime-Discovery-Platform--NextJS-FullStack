@@ -1,4 +1,4 @@
-# Anime Vault | Anime Discovery Platform – Next.js, GraphQL & REST, Server-Side Rendering FullStack Project (with infinite scroll, server actions)
+# Anime Discovery Platform – Next.js, GraphQL & REST, Server-Side Rendering FullStack Project (with infinite scroll, server actions)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
@@ -84,12 +84,12 @@ No backend database or auth; data comes from the public **Shikimori API**. Suita
 
 ### Core Technologies
 
-| Technology       | Version | Purpose                                              |
-| ---------------- | ------- | ---------------------------------------------------- |
-| **Next.js**      | 15      | App Router, SSR, Server Actions, API routes          |
-| **React**        | 18      | UI library and component model                       |
-| **TypeScript**   | 5       | Static typing and better DX                          |
-| **Tailwind CSS** | 3       | Utility-first CSS and responsive design              |
+| Technology       | Version | Purpose                                     |
+| ---------------- | ------- | ------------------------------------------- |
+| **Next.js**      | 15      | App Router, SSR, Server Actions, API routes |
+| **React**        | 18      | UI library and component model              |
+| **TypeScript**   | 5       | Static typing and better DX                 |
+| **Tailwind CSS** | 3       | Utility-first CSS and responsive design     |
 
 ### Key Libraries
 
@@ -241,11 +241,11 @@ Runs ESLint (Next.js config) to check code quality.
 
 ## 🛤 Routes & Pages
 
-| Route                  | File                        | Description                                      |
-| ---------------------- | --------------------------- | ------------------------------------------------ |
-| `/`                    | `app/page.tsx`              | Home: search, filters, anime grid, infinite scroll, Back to top |
-| `/anime/[id]`          | `app/anime/[id]/page.tsx`   | Detail: poster (lightbox + download), metadata, videos, screenshots (lightbox + download) |
-| `/api/download-image`  | `app/api/download-image/route.ts` | GET proxy for image download (allowed hosts: shikimori, img.youtube) |
+| Route                 | File                              | Description                                                                               |
+| --------------------- | --------------------------------- | ----------------------------------------------------------------------------------------- |
+| `/`                   | `app/page.tsx`                    | Home: search, filters, anime grid, infinite scroll, Back to top                           |
+| `/anime/[id]`         | `app/anime/[id]/page.tsx`         | Detail: poster (lightbox + download), metadata, videos, screenshots (lightbox + download) |
+| `/api/download-image` | `app/api/download-image/route.ts` | GET proxy for image download (allowed hosts: shikimori, img.youtube)                      |
 
 List data is fetched via the **Server Action** `fetchAnime` in `app/action.tsx` (GraphQL). Detail data is fetched in `app/anime/[id]/page.tsx` (GraphQL with REST fallback).
 
@@ -302,7 +302,10 @@ List data is fetched via the **Server Action** `fetchAnime` in `app/action.tsx` 
 **Usage:** In `app/page.tsx`, below the grid; pass `key={JSON.stringify(filters)}` and `initialFilters={filters}` so pagination resets when filters change.
 
 ```tsx
-<LoadMore key={JSON.stringify(filters ?? {})} initialFilters={filters ?? undefined} />
+<LoadMore
+  key={JSON.stringify(filters ?? {})}
+  initialFilters={filters ?? undefined}
+/>
 ```
 
 ---
