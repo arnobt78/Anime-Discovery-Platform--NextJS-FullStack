@@ -19,28 +19,32 @@ function Footer() {
         width={47}
         height={44}
         className="object-contain"
+        style={{ width: 47, height: 44 }}
       />
       <div className="flex items-center gap-6">
         <Image
           src="/tiktok.svg"
-          alt="logo"
+          alt="TikTok"
           width={19}
           height={19}
           className="object-contain"
+          style={{ width: 19, height: 19 }}
         />
         <Image
           src="/instagram.svg"
-          alt="logo"
+          alt="Instagram"
           width={19}
           height={19}
           className="object-contain"
+          style={{ width: 19, height: 19 }}
         />
         <Image
           src="/twitter.svg"
-          alt="logo"
+          alt="Twitter"
           width={19}
           height={19}
           className="object-contain"
+          style={{ width: 19, height: 19 }}
         />
       </div>
     </footer>

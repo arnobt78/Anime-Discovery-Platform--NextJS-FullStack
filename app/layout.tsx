@@ -12,6 +12,7 @@ import { DM_Sans } from "next/font/google";
 
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
+import { Providers } from "./providers";
 
 import "./globals.css";
 
@@ -137,16 +138,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      {/* Apply optimized font class to body */}
-      <body className={dmSans.className}>
-        {/* Main container with max-width and dark background */}
-        <main className="max-w-7xl mx-auto bg-[#0F1117]">
-          <Hero />
-          {/* Page content is injected here via children prop */}
-          {children}
-          <Footer />
-        </main>
+    <html lang="en" suppressHydrationWarning>
+      {/* Apply optimized font class to body. suppressHydrationWarning avoids mismatch from browser extensions. */}
+      <body className={dmSans.className} suppressHydrationWarning>
+        <Providers>
+          <main className="max-w-7xl mx-auto bg-[#0F1117]">
+            <Hero />
+            {children}
+            <Footer />
+          </main>
+        </Providers>
       </body>
     </html>
   );

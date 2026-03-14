@@ -1,10 +1,11 @@
-# Anime Vault | Anime Discovery Platform – Next.js Server-Side Rendering FullStack Project (with infinite scroll, server actions)
+# Anime Discovery Platform – Next.js, GraphQL, Server-Side Rendering FullStack Project (with infinite scroll, server actions)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2.35-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3-38bdf8)](https://tailwindcss.com/)
+[![GraphQL](https://img.shields.io/badge/GraphQL-16.10.0-e10098)](https://graphql.org/)
 [![Shikimori API](https://img.shields.io/badge/Shikimori-API-blue)](https://shikimori.one/api/doc)
 
 A modern, fully server-rendered anime listing and browsing platform built with **Next.js App Router**. Discover and explore anime with infinite scroll, beautiful animations, and real-time data from the Shikimori API. This project is designed for learning and instruction—demonstrating Server Components, Server Actions, infinite scroll, and SEO best practices in a single codebase.
@@ -362,32 +363,19 @@ import { MotionDiv } from "@/components/Motion";
 
 ## 🔌 API Integration & Backend
 
-### Shikimori API
+### Shikimori GraphQL API
 
-- **Base URL:** `https://shikimori.one/api`
-- **Endpoint used:** `GET /animes?page={page}&limit=8&order=popularity`
-- **Auth:** None. Public API.
+This project uses **Shikimori’s GraphQL API** for list and detail data (single endpoint, request only the fields you need). Queries, variables, and response handling live in **`lib/shikimori-graphql.ts`**—see that file for the full list/detail queries and how variables map to filters (search, kind, score, status, order). You can try queries in the [Shikimori GraphQL playground](https://shikimori.one/api/doc/graphql).
 
-**Parameters:**
+- **Endpoint:** `POST https://shikimori.one/api/graphql`
+- **Auth:** None. Public API. Optional `User-Agent` (e.g. `AnimeVault/1.0`) is sent.
 
-| Param   | Value      | Description        |
-| ------- | ---------- | ------------------ |
-| `page`  | 1, 2, …    | Page number        |
-| `limit` | 8          | Items per page     |
-| `order` | popularity | Sort by popularity |
+**Where it’s used:**
 
-**Response:** Array of anime objects. Relevant fields: `id`, `name`, `image.original`, `kind`, `episodes`, `episodes_aired`, `score`.
+- **List:** `app/action.tsx` → `fetchAnimeListGraphQL(page, filters)` → renders `<AnimeCard />` for each item.
+- **Detail:** `app/anime/[id]/page.tsx` → `fetchAnimeByIdGraphQL(id)` for the anime detail page (including videos, screenshots, next episode).
 
-**Where it’s used:** Only in `app/action.tsx` inside the `fetchAnime` Server Action. There is no separate backend; Next.js server runs the Server Action and talks to Shikimori.
-
-### Example: Using the same endpoint elsewhere
-
-```ts
-const res = await fetch(
-  "https://shikimori.one/api/animes?page=1&limit=8&order=popularity",
-);
-const animes = await res.json();
-```
+There is no separate backend; Next.js server runs Server Actions and the detail page and talks to Shikimori GraphQL.
 
 ---
 

@@ -13,10 +13,11 @@ function Hero() {
       <div className="flex-1 flex flex-col gap-10">
         <Image
           src="/logo.svg"
-          alt="logo"
-          width={101}
-          height={96}
-          className="object-contain"
+          alt="Anime Vault logo"
+          width={56}
+          height={53}
+          className="object-contain shrink-0"
+          style={{ width: 56, height: 53 }}
         />
         <h1 className="sm:text-6xl text-5xl text-white lg:max-w-lg font-bold leading-[120%]">
           Explore The <span className="red-gradient">Diverse Realms</span> of
@@ -24,7 +25,13 @@ function Hero() {
         </h1>
       </div>
       <div className="lg:flex-1 relative w-full h-[50vh] justify-center">
-        <Image src="/anime.png" alt="anime" fill className="object-contain" />
+        <Image
+          src="/anime.png"
+          alt="anime"
+          fill
+          className="object-contain"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
       </div>
     </header>
   );
