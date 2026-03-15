@@ -1,4 +1,4 @@
-# Anime Discovery Platform – Next.js, GraphQL & REST, Server-Side Rendering FullStack Project (with infinite scroll, server actions)
+# Anime Discovery Platform – Next.js, GraphQL & REST, Server-Side Rendering FullStack Fundamental Project 2 (with infinite scroll, server actions)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
